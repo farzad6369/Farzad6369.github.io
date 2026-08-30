@@ -1,544 +1,195 @@
 <!doctype html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Shadow Kingdom</title>
-
 <style>
 *{box-sizing:border-box}
-
-html,body{
-  margin:0;
-  height:100%;
-  overflow:hidden;
-  background:#050609;
-  font-family:Tahoma,Arial;
-  color:#fff
-}
-
-.scene{
-  position:fixed;
-  inset:0;
-  background:url("market_scene.png") center/cover no-repeat
-}
-
-.shade{
-  position:fixed;
-  inset:0;
-  background:radial-gradient(circle,transparent 35%,#0009)
-}
-
-.top{
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  height:58px;
-  background:#070a0ddd;
-  border-bottom:1px solid #a27a35;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 12px;
-  z-index:3
-}
-
-.logo{
-  color:#edcb70;
-  font-weight:bold
-}
-
-.stats{
-  display:flex;
-  gap:5px
-}
-
-.pill{
-  background:#151d28dd;
-  border:1px solid #536071;
-  border-radius:7px;
-  padding:6px 8px;
-  font-size:11px
-}
-
-.hot{
-  position:fixed;
-  z-index:2;
-  border:1px solid transparent;
-  border-radius:12px;
-  cursor:pointer
-}
-
-.hot:hover{
-  border-color:#e7bd5c;
-  background:#e7bd5c22
-}
-
-.market{
-  left:15%;
-  bottom:18%;
-  width:25%;
-  height:35%
-}
-
-.arena{
-  left:40%;
-  bottom:25%;
-  width:20%;
-  height:28%
-}
-
-.shop{
-  right:8%;
-  bottom:20%;
-  width:22%;
-  height:35%
-}
-
-.hero{
-  left:33%;
-  bottom:0;
-  width:34%;
-  height:42%
-}
-
-.tag{
-  position:absolute;
-  bottom:4px;
-  left:50%;
-  transform:translateX(-50%);
-  background:#080b0edd;
-  border:1px solid #a27a35;
-  border-radius:6px;
-  padding:5px 8px;
-  white-space:nowrap;
-  font-size:11px;
-  opacity:0
-}
-
-.hot:hover .tag{
-  opacity:1
-}
-
-.panel{
-  position:fixed;
-  top:70px;
-  width:210px;
-  background:#090f17ee;
-  border:1px solid #8b682f;
-  border-radius:10px;
-  padding:9px;
-  z-index:4;
-  font-size:11px
-}
-
-.left{left:9px}
-.right{right:9px}
-
-.panel h3{
-  margin:0 0 7px;
-  color:#edcb70
-}
-
-.item{
-  background:#151e29;
-  border:1px solid #334155;
-  border-radius:7px;
-  padding:7px;
-  margin:5px 0
-}
-
-button{
-  background:#b98b3d;
-  border:0;
-  border-radius:6px;
-  padding:7px 9px;
-  font-weight:bold;
-  margin-top:5px;
-  cursor:pointer
-}
-
-.bottom{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  height:68px;
-  background:#070a0edd;
-  border-top:1px solid #8b682f;
-  z-index:5;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:8px
-}
-
-.slot{
-  width:47px;
-  height:47px;
-  border:1px solid #8b682f;
-  background:#131a24ee;
-  border-radius:8px;
-  display:grid;
-  place-items:center;
-  font-size:22px;
-  cursor:pointer
-}
-
-#modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:#000b;
-  z-index:10;
-  align-items:center;
-  justify-content:center;
-  padding:15px
-}
-
-.box{
-  width:min(400px,100%);
-  background:#0d141e;
-  border:1px solid #b2863c;
-  border-radius:13px;
-  padding:15px
-}
-
-@media(max-width:700px){
-
-  .panel{
-    display:none
-  }
-
-  .top{
-    height:50px
-  }
-
-  .logo{
-    font-size:13px
-  }
-
-  .pill{
-    font-size:9px
-  }
-
-  .bottom{
-    height:62px
-  }
-
-}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050608;color:white;font-family:Tahoma,Arial}
+body{background:
+radial-gradient(circle at 50% 35%,#39465b 0,#111722 38%,#050608 80%)}
+.game{height:100%;position:relative}
+header{height:62px;background:#070a0eee;border-bottom:1px solid #a47b35;display:flex;align-items:center;justify-content:space-between;padding:0 12px}
+.logo{color:#e8c66d;font-weight:bold;font-size:18px}
+.stats{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.stat{background:#121a25;border:1px solid #4e5968;border-radius:8px;padding:6px 9px;font-size:11px}
+.world{position:absolute;top:62px;bottom:65px;left:0;right:0;overflow:hidden;
+background:
+linear-gradient(#0003,#0006),
+linear-gradient(135deg,#171c25,#303846 48%,#11151b)}
+.castle{position:absolute;top:8%;left:28%;right:28%;height:48%;
+background:linear-gradient(#667080,#242b36);
+clip-path:polygon(0 100%,0 35%,12% 35%,12% 10%,23% 10%,23% 35%,38% 35%,38% 0,62% 0,62% 35%,77% 35%,77% 10%,88% 10%,88% 35%,100% 35%,100% 100%);
+box-shadow:0 20px 70px #000}
+.gate{position:absolute;left:42%;right:42%;bottom:0;height:43%;background:#10141b;border:6px solid #626b78;border-bottom:0;border-radius:50% 50% 0 0}
+.market{position:absolute;left:3%;right:3%;bottom:4%;height:34%;display:flex;gap:3%;align-items:end;justify-content:center}
+.stall{width:18%;height:75%;background:linear-gradient(140deg,#7a4d2d,#281b16);border:2px solid #9d713b;border-radius:8px;box-shadow:0 12px 25px #0008;cursor:pointer}
+.stall:after{content:"🏺";display:grid;place-items:center;height:100%;font-size:40px}
+.hero{position:absolute;bottom:0;left:43%;width:14%;height:42%;background:linear-gradient(#171b22,#08090c);border-radius:50% 50% 0 0;box-shadow:0 0 35px #000}
+.hero:before{content:"👑";position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:42px}
+.hot{position:absolute;z-index:2;border:1px solid transparent;border-radius:12px;cursor:pointer}
+.hot:hover{border-color:#e7bd5c;background:#e7bd5c22}
+.hmarket{left:4%;bottom:12%;width:28%;height:30%}
+.hbattle{left:36%;bottom:24%;width:28%;height:25%}
+.hshop{right:4%;bottom:12%;width:28%;height:30%}
+.label{position:absolute;bottom:5px;left:50%;transform:translateX(-50%);white-space:nowrap;background:#080a0eea;border:1px solid #a27a35;padding:6px 9px;border-radius:7px;color:#f0ce75;font-size:11px}
+footer{position:absolute;bottom:0;left:0;right:0;height:65px;background:#070a0eee;border-top:1px solid #8b682f;display:flex;justify-content:center;align-items:center;gap:8px}
+footer button{width:48px;height:48px;background:#111925;color:#f0ce75;border:1px solid #9a7336;border-radius:9px;font-size:20px}
+#modal{display:none;position:fixed;inset:0;background:#000b;z-index:20;align-items:center;justify-content:center;padding:15px}
+.box{width:min(420px,100%);background:#0c131d;border:1px solid #b2863c;border-radius:14px;padding:16px}
+.box h2{color:#edcb70;margin-top:0}
+.row{background:#151e29;border:1px solid #334155;border-radius:8px;padding:9px;margin:7px 0;font-size:12px}
+.close{background:#b98b3d;border:0;border-radius:7px;padding:8px 13px;font-weight:bold}
+@media(max-width:650px){.logo{font-size:12px}.stat{font-size:9px;padding:5px}.castle{left:12%;right:12%}.stall{width:25%}.hero{left:39%;width:22%}}
 </style>
 </head>
 
 <body>
+<div class="game">
 
-<div class="scene"></div>
-<div class="shade"></div>
+<header>
+<div class="logo">🏰 Shadow Kingdom</div>
+<div class="stats">
+<div class="stat">👥 <b id="players">0</b>/1000</div>
+<div class="stat">🪙 <b id="coins">2500</b></div>
+<div class="stat">❤️ <b id="life">3</b></div>
+<div class="stat">💎 پرداخت: <b id="payment">قفل</b></div>
+</div>
+</header>
 
-<div class="top">
+<div class="world">
 
-  <div class="logo">
-    🏰 Shadow Kingdom · بازار پادشاهی
-  </div>
-
-  <div class="stats">
-
-    <div class="pill">
-      👤 ShadowLord
-    </div>
-
-    <div class="pill">
-      🪙 <b id="coins">2500</b>
-    </div>
-
-    <div class="pill">
-      ❤️ <b id="lives">3</b>
-    </div>
-
-    <div class="pill">
-      💎 USDT 0
-    </div>
-
-  </div>
-
+<div class="castle">
+<div class="gate"></div>
 </div>
 
-
-<!-- بازارچه -->
-
-<div
-class="hot market"
-onclick="show(
-'🏺 بازارچه',
-'بازار زنده، فروشنده‌ها و مایحتاج روزانه.',
-'پرداخت واقعی و تتر در این نسخه فعال نیست.'
-)">
-
-<span class="tag">
-🏺 بازارچه
-</span>
-
+<div class="market">
+<div class="stall"></div>
+<div class="stall"></div>
+<div class="stall"></div>
+<div class="stall"></div>
 </div>
 
+<div class="hero"></div>
 
-<!-- میدان نبرد -->
-
-<div
-class="hot arena"
-onclick="show(
-'⚔️ میدان نبرد',
-'مسابقه ۷۲ ساعته و مأموریت بین طرفین.',
-'نسخه آزمایشی؛ بدون پرداخت واقعی.'
-)">
-
-<span class="tag">
-⚔️ میدان نبرد
-</span>
-
+<div class="hot hmarket" onclick="market()">
+<div class="label">🏺 بازارچه</div>
 </div>
 
-
-<!-- فروشگاه -->
-
-<div
-class="hot shop"
-onclick="show(
-'✨ فروشگاه',
-'تجهیزات و کالاهای ویژه.',
-'پرداخت واقعی غیرفعال است.'
-)">
-
-<span class="tag">
-✨ فروشگاه
-</span>
-
+<div class="hot hbattle" onclick="battle()">
+<div class="label">⚔️ میدان نبرد</div>
 </div>
 
-
-<!-- شخصیت -->
-
-<div
-class="hot hero"
-onclick="show(
-'👑 شخصیت اصلی',
-'ShadowLord · سطح 1',
-'تشکیل شخصیت پایه رایگان است.'
-)">
-
-<span class="tag">
-👑 شخصیت
-</span>
-
-</div>
-
-
-<!-- مأموریت -->
-
-<div class="panel left">
-
-<h3>
-📜 مأموریت
-</h3>
-
-<div class="item">
-
-مایحتاج روزانه را تهیه کن
-
-<br>
-
-پاداش: 300 🪙
-
-<br>
-
-<button onclick="mission()">
-انجام مأموریت
-</button>
-
+<div class="hot hshop" onclick="shop()">
+<div class="label">🛒 فروشگاه</div>
 </div>
 
 </div>
 
-
-<!-- بازیکنان -->
-
-<div class="panel right">
-
-<h3>
-👥 بازیکنان
-</h3>
-
-<div class="item">
-⚔️ Ardashir · Lv12
-</div>
-
-<div class="item">
-🧙 Cyrus · Lv9
-</div>
-
-<div class="item">
-🏹 Rostam · Lv16
-</div>
-
-<div class="item">
-🔒 پرداخت واقعی غیرفعال
-</div>
+<footer>
+<button onclick="market()">🏺</button>
+<button onclick="mission()">📜</button>
+<button onclick="battle()">⚔️</button>
+<button onclick="character()">👑</button>
+<button onclick="playersInfo()">👥</button>
+</footer>
 
 </div>
-
-
-<!-- منوی پایین -->
-
-<div class="bottom">
-
-<div
-class="slot"
-onclick="show(
-'🏺 بازارچه',
-'مایحتاج روزانه و معامله بازیکنان',
-'پرداخت واقعی غیرفعال است.'
-)">
-🏺
-</div>
-
-<div
-class="slot"
-onclick="mission()">
-📜
-</div>
-
-<div
-class="slot"
-onclick="battle()">
-⚔️
-</div>
-
-<div
-class="slot"
-onclick="show(
-'👤 شخصیت',
-'ShadowLord · سطح 1',
-'ارتقا در نسخه آزمایشی فعال نیست.'
-)">
-👤
-</div>
-
-</div>
-
-
-<!-- پنجره -->
 
 <div id="modal">
-
 <div class="box">
-
-<h2 id="mt"></h2>
-
-<div id="mc"></div>
-
-<button onclick="modal.style.display='none'">
-بستن
-</button>
-
+<h2 id="title"></h2>
+<div id="content"></div>
+<button class="close" onclick="closeModal()">بستن</button>
 </div>
-
 </div>
-
 
 <script>
+let coins=2500;
+let life=3;
+let players=0;
 
-let coins = 2500;
-let lives = 3;
-
-const coinsEl =
-document.getElementById("coins");
-
-const livesEl =
-document.getElementById("lives");
-
-function show(title,text1,text2){
-
-document.getElementById("mt").textContent =
-title;
-
-document.getElementById("mc").innerHTML =
-'<div class="item">'+text1+
-'</div><div class="item">'+text2+
-'</div>';
-
-document.getElementById("modal")
-.style.display="flex";
-
-}
+const coinsEl=document.getElementById("coins");
+const lifeEl=document.getElementById("life");
+const playersEl=document.getElementById("players");
+const paymentEl=document.getElementById("payment");
 
 function sync(){
+ coinsEl.textContent=coins;
+ lifeEl.textContent=life;
+ playersEl.textContent=players;
+ paymentEl.textContent=players>=1000?"فعال":"قفل";
+}
 
-coinsEl.textContent = coins;
+function show(title,text){
+ document.getElementById("title").textContent=title;
+ document.getElementById("content").innerHTML='<div class="row">'+text+'</div>';
+ document.getElementById("modal").style.display="flex";
+}
 
-livesEl.textContent = lives;
+function closeModal(){
+ document.getElementById("modal").style.display="none";
+}
 
+function useLife(){
+ if(life<=0){
+  alert("جان کافی نیست");
+  return false;
+ }
+ life--;
+ sync();
+ return true;
+}
+
+function market(){
+ show("🏺 بازارچه",
+ "به بازار پادشاهی خوش آمدی.<br><br>"+
+ "🪙 خریدهای این نسخه با سکه درون‌بازی انجام می‌شود.<br>"+
+ "💎 پرداخت واقعی فعلاً غیرفعال است.");
 }
 
 function mission(){
-
-if(lives <= 0){
-
-alert("جان کافی نیست");
-
-return;
-
-}
-
-lives--;
-
-coins += 300;
-
-sync();
-
-show(
-"📜 مأموریت کامل شد",
-"+300 سکه",
-"هیچ پرداخت واقعی انجام نشد."
-);
-
+ if(!useLife())return;
+ coins+=300;
+ show("📜 مأموریت",
+ "مأموریت کامل شد.<br><br>پاداش: <b>300 🪙</b>");
 }
 
 function battle(){
-
-if(lives <= 0){
-
-alert("جان کافی نیست");
-
-return;
-
+ if(!useLife())return;
+ coins+=500;
+ show("⚔️ نبرد آزمایشی",
+ "نبرد با موفقیت پایان یافت.<br><br>پاداش: <b>500 🪙</b>");
 }
 
-lives--;
+function shop(){
+ show("🛒 فروشگاه",
+ "تجهیزات و آیتم‌های بازی.<br><br>"+
+ "پرداخت واقعی تا رسیدن به ۱۰۰۰ بازیکن قفل است.");
+}
 
-coins += 500;
+function character(){
+ show("👑 شخصیت",
+ "ShadowLord<br>سطح 1<br><br>"+
+ "تشکیل شخصیت پایه: رایگان");
+}
 
-sync();
-
-show(
-"⚔️ نبرد آزمایشی",
-"+500 سکه",
-"پرداخت واقعی غیرفعال است."
-);
-
+function playersInfo(){
+ show("👥 بازیکنان",
+ "بازیکنان فعلی: <b>"+players+"</b><br><br>"+
+ "🌐 در ۱۰۰ نفر: بازی آنلاین فعال می‌شود.<br>"+
+ "💎 در ۱۰۰۰ نفر: بخش پرداخت باز می‌شود.");
 }
 
 setInterval(function(){
-
-if(lives < 3){
-
-lives++;
-
-sync();
-
-}
-
+ if(life<3){
+  life++;
+  sync();
+ }
 },3600000);
 
+sync();
 </script>
 
 </body>
