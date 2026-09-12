@@ -3,386 +3,548 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Luna's Magical World</title>
 
 <style>
-*{box-sizing:border-box}
+* {
+    box-sizing: border-box;
+}
 
-body{
-    margin:0;
-    font-family:Georgia,"Times New Roman",serif;
-    color:#fff;
+body {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
     background:
-      radial-gradient(circle at 50% 0%,#60458c 0,#24163f 42%,#0d0918 100%);
-    min-height:100vh;
+        radial-gradient(circle at top, #43206b 0%, #1a0b2e 45%, #090512 100%);
+    color: #fff;
+    min-height: 100vh;
 }
 
-body:before{
-    content:"✦  ✧  ⋆  ✦  ✧  ⋆  ✦  ✧";
-    position:fixed;
-    top:15px;
-    left:0;
-    width:100%;
-    text-align:center;
-    color:#f5d98c;
-    opacity:.35;
-    font-size:22px;
-    pointer-events:none;
+.container {
+    width: 92%;
+    max-width: 1100px;
+    margin: auto;
+    padding: 35px 0 60px;
 }
 
-.header{
-    text-align:center;
-    padding:55px 18px 35px;
+.cover {
+    border: 2px solid #d8b35a;
+    border-radius: 24px;
+    padding: 45px 25px;
+    text-align: center;
+    background:
+        linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+    box-shadow:
+        0 0 35px rgba(216,179,90,.20),
+        inset 0 0 30px rgba(216,179,90,.08);
 }
 
-.moon{
-    font-size:65px;
-    color:#f7dc91;
-    text-shadow:0 0 30px #f7dc91;
+.moon {
+    font-size: 55px;
+    color: #f5d77a;
+    margin-bottom: 8px;
 }
 
-.logo{
-    font-size:30px;
-    letter-spacing:3px;
-    color:#f7dc91;
-    font-weight:bold;
-    margin:12px 0;
+.logo {
+    font-size: clamp(30px, 7vw, 58px);
+    letter-spacing: 5px;
+    color: #f5d77a;
+    text-shadow: 0 0 15px rgba(245,215,122,.35);
+    margin: 5px 0 20px;
 }
 
-.collection{
-    letter-spacing:4px;
-    font-size:13px;
-    color:#d9c9ef;
-    margin-top:18px;
+.collection {
+    font-size: 16px;
+    letter-spacing: 3px;
+    color: #d8b35a;
+    text-transform: uppercase;
 }
 
-h1{
-    font-size:34px;
-    margin:12px 0;
+.collection-name {
+    font-size: clamp(22px, 5vw, 38px);
+    margin: 12px 0;
 }
 
-.subtitle{
-    color:#d8cbea;
-    font-size:17px;
+.subtitle {
+    color: #d7cbe5;
+    font-size: 17px;
+    margin-top: 10px;
 }
 
-.container{
-    max-width:1100px;
-    margin:auto;
-    padding:15px 18px 60px;
+.welcome {
+    text-align: center;
+    margin: 45px 0 25px;
 }
 
-.intro{
-    text-align:center;
-    padding:28px 20px;
-    margin-bottom:25px;
-    border:1px solid #f7dc9140;
-    border-radius:25px;
-    background:#ffffff0d;
-    box-shadow:0 15px 45px #0006;
+.welcome h2 {
+    font-size: 30px;
+    color: #f5d77a;
+    margin-bottom: 8px;
 }
 
-.intro h2{
-    color:#f7dc91;
+.welcome p {
+    color: #d7cbe5;
 }
 
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:18px;
+.stories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px;
 }
 
-.story{
-    min-height:235px;
-    padding:22px;
-    border-radius:22px;
-    border:1px solid #f7dc9140;
-    background:linear-gradient(145deg,#ffffff16,#ffffff06);
-    box-shadow:0 12px 35px #0007;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    transition:.25s;
+.story {
+    border: 1px solid rgba(216,179,90,.45);
+    border-radius: 18px;
+    padding: 22px;
+    background: rgba(255,255,255,.055);
+    box-shadow: 0 8px 25px rgba(0,0,0,.25);
+    transition: .2s;
 }
 
-.story:hover{
-    transform:translateY(-5px);
-    border-color:#f7dc91aa;
+.story:hover {
+    transform: translateY(-4px);
+    border-color: #f5d77a;
 }
 
-.number{
-    color:#f7dc91;
-    letter-spacing:2px;
-    font-size:13px;
+.story-number {
+    color: #d8b35a;
+    font-size: 14px;
+    letter-spacing: 2px;
 }
 
-.story h3{
-    font-size:21px;
-    line-height:1.3;
-    margin:14px 0;
+.story-title {
+    font-size: 20px;
+    margin: 10px 0 18px;
+    min-height: 50px;
 }
 
-.free{
-    display:inline-block;
-    padding:11px 16px;
-    border-radius:12px;
-    background:#f7dc91;
-    color:#21152f;
-    font-weight:bold;
-    text-align:center;
+.button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
 }
 
-.lock{
-    color:#d8cbea;
-    padding:11px;
-    border-radius:12px;
-    background:#ffffff10;
-    border:1px solid #ffffff20;
-    text-align:center;
+.read {
+    background: linear-gradient(135deg, #d8b35a, #f5d77a);
+    color: #21102f;
 }
 
-.price{
-    color:#f7dc91;
-    font-weight:bold;
-    margin-bottom:9px;
+.coming {
+    background: rgba(255,255,255,.08);
+    color: #cfc4d9;
+    border: 1px solid rgba(255,255,255,.15);
 }
 
-footer{
-    text-align:center;
-    padding:30px;
-    color:#9d91ae;
-    border-top:1px solid #ffffff18;
+.locked {
+    background: rgba(120,70,160,.22);
+    color: #d8b35a;
+    border: 1px solid rgba(216,179,90,.25);
 }
 
-@media(max-width:600px){
-    .logo{font-size:22px}
-    h1{font-size:27px}
-    .story h3{font-size:19px}
+.free {
+    display: inline-block;
+    font-size: 12px;
+    color: #9ff0bd;
+    margin-bottom: 10px;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 50px;
+    color: #a99db5;
+    font-size: 13px;
+}
+
+@media (max-width: 600px) {
+    .container {
+        width: 94%;
+        padding-top: 20px;
+    }
+
+    .cover {
+        padding: 35px 18px;
+    }
+
+    .logo {
+        letter-spacing: 3px;
+    }
+
+    .stories {
+        grid-template-columns: 1fr;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<header class="header">
+<div class="container">
 
-<div class="moon">☾</div>
+    <section class="cover">
 
-<div class="logo">
-LUNA'S MAGICAL WORLD
+        <div class="moon">☾ ✦</div>
+
+        <div class="logo">
+            LUNA'S MAGICAL WORLD
+        </div>
+
+        <div class="collection">
+            Collection 1
+        </div>
+
+        <div class="collection-name">
+            Luna and the Amazing Farm
+        </div>
+
+        <div class="subtitle">
+            100 Magical Illustrated Stories
+        </div>
+
+    </section>
+
+
+    <section class="welcome">
+
+        <h2>Welcome to Luna's World ✨</h2>
+
+        <p>
+            A magical journey begins here.
+        </p>
+
+        <p>
+            Stories 01–10 are free.
+        </p>
+
+    </section>
+
+
+    <section class="stories">
+
+
+        <!-- STORY 01 -->
+
+        <div class="story">
+
+            <div class="story-number">
+                STORY 01
+            </div>
+
+            <div class="story-title">
+                A New Home, A New World
+            </div>
+
+            <div class="free">
+                FREE
+            </div>
+
+            <a
+                class="button read"
+                href="stories/01.html">
+                READ STORY 01
+            </a>
+
+        </div>
+
+
+        <!-- STORY 02 -->
+
+        <div class="story">
+
+            <div class="story-number">
+                STORY 02
+            </div>
+
+            <div class="story-title">
+                A Sound No One Heard
+            </div>
+
+            <div class="free">
+                FREE
+            </div>
+
+            <div class="button coming">
+                COMING SOON
+            </div>
+
+        </div>
+
+
+        <!-- STORY 03 -->
+
+        <div class="story">
+
+            <div class="story-number">
+                STORY 03
+            </div>
+
+            <div class="story-title">
+                A Letter for the One Who Hears the Forest
+            </div>
+
+            <div class="free">
+                FREE
+            </div>
+
+            <div class="button coming">
+                COMING SOON
+            </div>
+
+        </div>
+
+
+        <!-- STORY 04 -->
+
+        <div class="story">
+
+            <div class="story-number">
+                STORY 04
+            </div>
+
+            <div class="story-title">
+                Someone Behind the Fence
+            </div>
+
+            <div class="free">
+                FREE
+            </div>
+
+            <div class="button coming">
+                COMING SOON
+            </div>
+
+        </div>
+
+
+        <!-- STORY 05 -->
+
+        <div class="story">
+
+            <div class="story-number">
+                STORY 05
+            </div>
+
+            <div class="story-title">
+                The Tree That Should Not Be Touched
+            </div>
+
+            <div class="free">
+                FREE
+            </div>
+
+            <div class="button coming">
+                COMING SOON
+            </div>
+
+        </div>
+
+
+        <!-- STORY 06 -->
+
+        <div class="story">
+
+            <div class="story-number">
+                STORY 06
+            </div>
+
+            <div class="story-title">
+                Garo's Little Secret
+            </div>
+
+            <div class="free">
+                FREE
+            </div>
+
+            <div class="button coming">
+                COMING SOON
+            </div>
+
+        </div>
+
+
+        <!-- STORY 07 -->
+
+        <div class="story">
+
+            <div class="story-number">
+                STORY 07
+            </div>
+
+            <div class="story-title">
+                The Voices of Animals
+            </div>
+
+            <div class="free">
+                FREE
+            </div>
+
+            <div class="button coming">
+                COMING SOON
+            </div>
+
+        </div>
+
+
+        <!-- STORY 08 -->
+
+        <div class="story">
+
+            <div class="story-number">
+                STORY 08
+            </div>
+
+            <div class="story-title">
+                The Girl Beside the Pond
+            </div>
+
+            <div class="free">
+                FREE
+            </div>
+
+            <div class="button coming">
+                COMING SOON
+            </div>
+
+        </div>
+
+
+        <!-- STORY 09 -->
+
+        <div class="story">
+
+            <div class="story-number">
+                STORY 09
+            </div>
+
+            <div class="story-title">
+                The Boat on the Water
+            </div>
+
+            <div class="free">
+                FREE
+            </div>
+
+            <div class="button coming">
+                COMING SOON
+            </div>
+
+        </div>
+
+
+        <!-- STORY 10 -->
+
+        <div class="story">
+
+            <div class="story-number">
+                STORY 10
+            </div>
+
+            <div class="story-title">
+                A Light in the Forest
+            </div>
+
+            <div class="free">
+                FREE
+            </div>
+
+            <div class="button coming">
+                COMING SOON
+            </div>
+
+        </div>
+
+
+        <!-- STORIES 11-20 -->
+
+        <div class="story">
+            <div class="story-number">STORIES 11–20</div>
+            <div class="story-title">Paid Pack 01</div>
+            <div class="button locked">🔒 PACK 1 · 10 USDT</div>
+        </div>
+
+
+        <!-- STORIES 21-30 -->
+
+        <div class="story">
+            <div class="story-number">STORIES 21–30</div>
+            <div class="story-title">Paid Pack 02</div>
+            <div class="button locked">🔒 PACK 2 · 10 USDT</div>
+        </div>
+
+
+        <!-- STORIES 31-40 -->
+
+        <div class="story">
+            <div class="story-number">STORIES 31–40</div>
+            <div class="story-title">Paid Pack 03</div>
+            <div class="button locked">🔒 PACK 3 · 10 USDT</div>
+        </div>
+
+
+        <!-- STORIES 41-50 -->
+
+        <div class="story">
+            <div class="story-number">STORIES 41–50</div>
+            <div class="story-title">Paid Pack 04</div>
+            <div class="button locked">🔒 PACK 4 · 10 USDT</div>
+        </div>
+
+
+        <!-- STORIES 51-60 -->
+
+        <div class="story">
+            <div class="story-number">STORIES 51–60</div>
+            <div class="story-title">Paid Pack 05</div>
+            <div class="button locked">🔒 PACK 5 · 10 USDT</div>
+        </div>
+
+
+        <!-- STORIES 61-70 -->
+
+        <div class="story">
+            <div class="story-number">STORIES 61–70</div>
+            <div class="story-title">Paid Pack 06</div>
+            <div class="button locked">🔒 PACK 6 · 10 USDT</div>
+        </div>
+
+
+        <!-- STORIES 71-80 -->
+
+        <div class="story">
+            <div class="story-number">STORIES 71–80</div>
+            <div class="story-title">Paid Pack 07</div>
+            <div class="button locked">🔒 PACK 7 · 10 USDT</div>
+        </div>
+
+
+        <!-- STORIES 81-90 -->
+
+        <div class="story">
+            <div class="story-number">STORIES 81–90</div>
+            <div class="story-title">Paid Pack 08</div>
+            <div class="button locked">🔒 PACK 8 · 10 USDT</div>
+        </div>
+
+
+        <!-- STORIES 91-100 -->
+
+        <div class="story">
+            <div class="story-number">STORIES 91–100</div>
+            <div class="story-title">Paid Pack 09</div>
+            <div class="button locked">🔒 PACK 9 · 10 USDT</div>
+        </div>
+
+    </section>
+
+
+    <div class="footer">
+        © Luna's Magical World · Collection 1
+    </div>
+
 </div>
-
-<div class="collection">
-COLLECTION 1
-</div>
-
-<h1>
-Luna and the Amazing Farm
-</h1>
-
-<div class="subtitle">
-100 Magical Illustrated Stories
-</div>
-
-</header>
-
-<main class="container">
-
-<section class="intro">
-<h2>Welcome to Luna's World ✨</h2>
-<p>
-A magical journey begins here.
-</p>
-<p>
-Stories 01–10 are free.
-</p>
-<p>
-Each following collection contains 10 stories for 10 USDT.
-</p>
-</section>
-
-<section class="grid" id="stories"></section>
-
-</main>
-
-<footer>
-© Luna's Magical World · 100 Stories
-</footer>
-
-<script>
-
-const titles = [
-
-"A New Home, A New World",
-"A Sound No One Heard",
-"A Letter for the One Who Hears the Forest",
-"Someone Behind the Fence",
-"The Tree That Should Not Be Touched",
-"Garo's Little Secret",
-"The Voices of Animals",
-"The Girl Beside the Pond",
-"The Boat on the Water",
-"A Light in the Forest",
-
-"What Grandmother Knew",
-"The Old Map",
-"A Sound Beneath the Ground",
-"A Place That Was Not on the Map",
-"Grandmother's Key",
-"The Little Chest",
-"Something Beneath the Soil",
-"Seeds with a Strange Mark",
-"The First Planting",
-"The Plant That Grew Overnight",
-
-"A Fruit That Had Never Existed",
-"The Animals Know the Garden",
-"The First Real Conversation",
-"The Secret of Grandmother's Seeds",
-"The Garden That Keeps Growing",
-"A Path Between the Roots",
-"The Room Beneath the Tree",
-"A Picture from the Past",
-"A Name Luna Did Not Know",
-"The Tree Awakens",
-
-"Footprints in the Mud",
-"The Guardians of the Forest",
-"The River That Changed Its Course",
-"The Abandoned House",
-"A Bell in the Mist",
-"The Fox That Spoke",
-"The Moving Trees",
-"The Little Island",
-"The Lost Notebook",
-"The Story of the First Guardian",
-
-"A Seed from Another Land",
-"An Enemy Still Unseen",
-"The Great Storm",
-"Saving the Farm",
-"A Gate Among the Roots",
-"The Gate Is Closed",
-"Three Signs",
-"The Secret of the Ancient Stones",
-"Grandmother Does Not Tell Everything",
-"The First Entry",
-
-"The Land Beyond the Gate",
-"The City Without a Sun",
-"The Man Who Knew Luna",
-"The Mysterious Market",
-"A Stranger's Gift",
-"The Way Back",
-"Garo Disappears",
-"Searching the City",
-"The Gate Is Closing",
-"Separation",
-
-"Morning in the Unknown Land",
-"New Friends",
-"The Laws of This World",
-"The Blue Forest",
-"The Giant Birds",
-"The Reversed River",
-"The Distant Castle",
-"The Secret of the Ancient King",
-"The Map of Seven Lands",
-"Luna's Name on the Stone",
-
-"The Truth About the Seeds",
-"The Enemy Steps from the Shadows",
-"The Battle in the Forest",
-"A Road That Opens Only Once",
-"The Return Home",
-"A Farm That Had Changed",
-"One Year in One Night",
-"The Animals Were No Longer the Same",
-"The Second Letter",
-"Father's Secret",
-
-"Grandmother's Past",
-"Luna's First Guardian",
-"The Enemy's Sign",
-"Danger for the Family",
-"The Confrontation by the River",
-"The Secret of the Tree Revealed",
-"The Last Seed",
-"Luna's Choice",
-"The Night the Sky Split",
-"The Beginning of the Great War",
-
-"The Shadows Return",
-"Everyone Together",
-"The Battle at the Farm",
-"Garo's Secret",
-"The Last Gate",
-"The Great Sacrifice",
-"Light in the Darkness",
-"Saving the Farm",
-"The Chest Opens Again",
-"Beyond the Gate"
-
-];
-
-const grid=document.getElementById("stories");
-
-titles.forEach((title,index)=>{
-
-    const n=index+1;
-    const number=String(n).padStart(2,"0");
-
-    const card=document.createElement("article");
-    card.className="story";
-
-    let button="";
-
-    if(n<=10){
-
-        button=`
-        <a class="free" href="#">
-        READ STORY ${number}
-        </a>`;
-
-    }else{
-
-        const pack=Math.ceil(n/10);
-
-        button=`
-        <div>
-        <div class="price">
-        🔒 PACK ${pack} · 10 USDT
-        </div>
-        <div class="lock">
-        LOCKED
-        </div>
-        </div>`;
-
-    }
-
-    card.innerHTML=`
-
-        <div>
-
-        <div class="number">
-        STORY ${number}
-        </div>
-
-        <h3>
-        ${title}
-        </h3>
-
-        </div>
-
-        ${button}
-
-    `;
-
-    grid.appendChild(card);
-
-});
-
-</script>
 
 </body>
 </html>
