@@ -3,417 +3,403 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Luna's Magical World</title>
+<title>Luna's Magical World - Story 01</title>
 
 <style>
-*{
-    box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
-    margin:0;
-    min-height:100vh;
-    background:
-        radial-gradient(circle at top,#55347e 0%,#251438 42%,#0e0918 100%);
-    color:white;
-    font-family:Georgia,serif;
+margin:0;
+background:linear-gradient(135deg,#160d28,#38205c,#170d2b);
+color:#fff;
+font-family:Georgia,serif;
 }
 
-.header{
-    text-align:center;
-    padding:55px 20px 35px;
+.container{
+max-width:850px;
+margin:auto;
+padding:20px;
+}
+
+.cover{
+border:2px solid #d8b45c;
+border-radius:25px;
+padding:35px 20px;
+text-align:center;
+background:rgba(20,10,35,.85);
+box-shadow:0 0 30px rgba(216,180,92,.25);
 }
 
 .moon{
-    font-size:58px;
-    color:#f0d27a;
-    text-shadow:0 0 25px rgba(240,210,122,.45);
+font-size:55px;
+margin-bottom:10px;
 }
 
 .logo{
-    font-size:30px;
-    font-weight:bold;
-    letter-spacing:4px;
-    color:#f0d27a;
-    margin-top:10px;
+color:#f0ce72;
+font-size:25px;
+letter-spacing:3px;
+font-weight:bold;
 }
 
-.collection-label{
-    margin-top:28px;
-    color:#d9bd70;
-    letter-spacing:3px;
-    font-size:14px;
+.collection{
+margin-top:25px;
+color:#d8b45c;
+font-size:15px;
+letter-spacing:2px;
+line-height:1.8;
+}
+
+.story-number{
+margin-top:20px;
+color:#aaa;
+letter-spacing:3px;
 }
 
 h1{
-    font-size:42px;
-    color:#fff0b5;
-    margin:12px 0;
+color:#ffe9a6;
+font-size:36px;
+line-height:1.3;
+margin:12px 0;
 }
 
 .subtitle{
-    color:#d8cce5;
-    font-size:17px;
+color:#d9cce8;
+font-size:16px;
 }
 
-.intro{
-    max-width:750px;
-    margin:0 auto 35px;
-    padding:0 20px;
-    text-align:center;
-    color:#d9cee5;
-    line-height:1.8;
+.story{
+margin-top:25px;
+padding:30px 25px;
+border-radius:20px;
+background:rgba(255,255,255,.07);
+border:1px solid rgba(216,180,92,.25);
+font-size:18px;
+line-height:1.9;
 }
 
-.grid{
-    max-width:1000px;
-    margin:auto;
-    padding:10px 18px 60px;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:18px;
+.story p{
+margin:0 0 22px;
 }
 
-.card{
-    position:relative;
-    padding:24px;
-    border-radius:20px;
-    background:rgba(255,255,255,.07);
-    border:1px solid rgba(216,184,106,.28);
-    box-shadow:0 8px 25px rgba(0,0,0,.2);
-    transition:.25s;
+.first:first-letter{
+font-size:55px;
+color:#e6c467;
+float:left;
+line-height:.8;
+padding-right:8px;
 }
 
-.card:hover{
-    transform:translateY(-4px);
-    border-color:#d8b86a;
+.end{
+margin-top:30px;
+padding-top:25px;
+border-top:1px solid rgba(216,180,92,.4);
+text-align:center;
+color:#f0d991;
+font-style:italic;
 }
 
-.number{
-    color:#d8b86a;
-    font-size:13px;
-    letter-spacing:2px;
+.back{
+display:block;
+width:max-content;
+margin:30px auto 0;
+padding:12px 24px;
+border:1px solid #d8b45c;
+border-radius:30px;
+color:#f0ce72;
+text-decoration:none;
 }
 
-h2{
-    font-size:20px;
-    color:#fff0bb;
-    line-height:1.4;
-    margin:10px 0 15px;
-}
-
-.free{
-    display:inline-block;
-    color:#9ff0bd;
-    font-size:13px;
-    margin-bottom:14px;
-}
-
-.locked{
-    display:inline-block;
-    color:#c5b8d1;
-    font-size:13px;
-    margin-bottom:14px;
-}
-
-.btn{
-    display:inline-block;
-    text-decoration:none;
-    border:1px solid #d8b86a;
-    border-radius:25px;
-    padding:10px 18px;
-    color:#f0d27a;
-    font-size:13px;
-    transition:.2s;
-}
-
-.btn:hover{
-    background:#d8b86a;
-    color:#21152f;
-}
-
-.disabled{
-    opacity:.55;
-    cursor:default;
-}
-
-.pack{
-    color:#cfc1dc;
-    font-size:13px;
-    margin-bottom:13px;
-}
-
-.footer{
-    text-align:center;
-    padding:30px 20px 50px;
-    color:#91849f;
-    font-size:13px;
+.back:hover{
+background:#d8b45c;
+color:#21122f;
 }
 
 @media(max-width:600px){
-
-    .logo{
-        font-size:22px;
-    }
-
-    h1{
-        font-size:30px;
-    }
-
-    .grid{
-        grid-template-columns:1fr;
-    }
+h1{font-size:28px}
+.story{
+padding:22px 18px;
+font-size:17px;
+}
+.logo{font-size:20px}
 }
 </style>
 </head>
 
 <body>
 
-<header class="header">
+<div class="container">
 
-    <div class="moon">☾ ✦</div>
+<div class="cover">
 
-    <div class="logo">
-        LUNA'S MAGICAL WORLD
-    </div>
+<div class="moon">☾ ✦</div>
 
-    <div class="collection-label">
-        COLLECTION 1
-    </div>
+<div class="logo">
+LUNA'S MAGICAL WORLD
+</div>
 
-    <h1>
-        Luna and the Amazing Farm
-    </h1>
+<div class="collection">
+COLLECTION 1<br>
+Luna and the Amazing Farm
+</div>
 
-    <div class="subtitle">
-        100 Magical Illustrated Stories
-    </div>
+<div class="story-number">
+STORY 01
+</div>
 
-</header>
+<h1>
+A New Home, A New World
+</h1>
 
-
-<div class="intro">
-
-    Welcome to Luna's Magical World.
-
-    <br>
-
-    The first ten stories are free.
-    More adventures will unlock as Luna's journey continues.
+<div class="subtitle">
+The beginning of Luna's magical journey
+</div>
 
 </div>
 
+<div class="story">
 
-<main class="grid" id="stories"></main>
+<p class="first">
+Luna was fourteen years old when she arrived at the farm with her family.
+</p>
 
+<p>
+The farm stood at the edge of a quiet village, surrounded by green hills, fruit trees, and a narrow river that curved gently through the land.
+</p>
 
-<footer class="footer">
+<p>
+Their new home was a simple wooden house with a small garden in front. Behind it stood an old wooden shed, a pond filled with little fish and frogs, and a wooden bridge that crossed the stream.
+</p>
 
-    LUNA'S MAGICAL WORLD © 2026
+<p>
+Luna loved the place immediately.
+</p>
 
-    <br><br>
+<p>
+Her father was a baker in the village. Every morning, the smell of fresh bread filled their home.
+</p>
 
-    Collection 1 — Luna and the Amazing Farm
+<p>
+Her mother worked in people's homes around the village. She often returned home tired, but she always smiled when she saw Luna.
+</p>
 
-</footer>
+<p>
+Luna's uncle was the village postman. He traveled from house to house on his bicycle, carrying letters and small packages.
+</p>
 
+<p>
+Her grandmother lived with the family too. She was quiet and thoughtful. Sometimes Luna felt that her grandmother knew secrets that nobody else knew.
+</p>
 
-<script>
+<p>
+Luna also had a cousin who used a wheelchair. The two girls enjoyed spending time together beside the pond, watching the ducks and talking about their dreams.
+</p>
 
-const stories = [
+<p>
+And then there was Garo.
+</p>
 
-["A New Home, A New World", true],
-["A Sound No One Heard", true],
-["A Letter for the One Who Hears the Forest", true],
-["Someone Behind the Fence", true],
-["The Tree That Should Not Be Touched", true],
-["Garo's Little Secret", true],
-["The Voices of Animals", true],
-["The Girl Beside the Pond", true],
-["The Boat on the Water", true],
-["A Light in the Forest", true],
+<p>
+Garo was Luna's loyal dog. Wherever Luna went, Garo followed.
+</p>
 
-["What Grandmother Knew", false],
-["The Old Map", false],
-["A Sound Beneath the Ground", false],
-["A Place That Was Not on the Map", false],
-["Grandmother's Key", false],
-["The Little Chest", false],
-["Something Beneath the Soil", false],
-["Seeds with a Strange Mark", false],
-["The First Planting", false],
-["The Plant That Grew Overnight", false],
+<p>
+On Luna's first afternoon at the farm, she walked across the wooden bridge with Garo beside her.
+</p>
 
-["A Fruit That Had Never Existed", false],
-["The Animals Know the Garden", false],
-["The First Real Conversation", false],
-["The Secret of Grandmother's Seeds", false],
-["The Garden That Keeps Growing", false],
-["A Path Between the Roots", false],
-["The Room Beneath the Tree", false],
-["A Picture from the Past", false],
-["A Name Luna Did Not Know", false],
-["The Tree Awakens", false],
+<p>
+Beyond the bridge stood several old fruit trees. Apples, pears, plums, and cherries grew among their branches.
+</p>
 
-["Footprints in the Mud", false],
-["The Guardians of the Forest", false],
-["The River That Changed Its Course", false],
-["The Abandoned House", false],
-["A Bell in the Mist", false],
-["The Fox That Spoke", false],
-["The Moving Trees", false],
-["The Little Island", false],
-["The Lost Notebook", false],
-["The Story of the First Guardian", false],
+<p>
+But one tree was different.
+</p>
 
-["A Seed from Another Land", false],
-["An Enemy Still Unseen", false],
-["The Great Storm", false],
-["Saving the Farm", false],
-["A Gate Among the Roots", false],
-["The Gate Is Closed", false],
-["Three Signs", false],
-["The Secret of the Ancient Stones", false],
-["Grandmother Does Not Tell Everything", false],
-["The First Entry", false],
+<p>
+It stood beside the river.
+</p>
 
-["The Land Beyond the Gate", false],
-["The City Without a Sun", false],
-["The Man Who Knew Luna", false],
-["The Mysterious Market", false],
-["A Stranger's Gift", false],
-["The Way Back", false],
-["Garo Disappears", false],
-["Searching the City", false],
-["The Gate Is Closing", false],
-["Separation", false],
+<p>
+It was much larger and older than every other tree on the farm. Its trunk was enormous, and its branches reached high into the sky.
+</p>
 
-["Morning in the Unknown Land", false],
-["New Friends", false],
-["The Laws of This World", false],
-["The Blue Forest", false],
-["The Giant Birds", false],
-["The Reversed River", false],
-["The Distant Castle", false],
-["The Secret of the Ancient King", false],
-["The Map of Seven Lands", false],
-["Luna's Name on the Stone", false],
+<p>
+Luna slowly walked toward it.
+</p>
 
-["The Truth About the Seeds", false],
-["The Enemy Steps from the Shadows", false],
-["The Battle in the Forest", false],
-["A Road That Opens Only Once", false],
-["The Return Home", false],
-["A Farm That Had Changed", false],
-["One Year in One Night", false],
-["The Animals Were No Longer the Same", false],
-["The Second Letter", false],
-["Father's Secret", false],
+<p>
+Garo suddenly stopped.
+</p>
 
-["Grandmother's Past", false],
-["Luna's First Guardian", false],
-["The Enemy's Sign", false],
-["Danger for the Family", false],
-["The Confrontation by the River", false],
-["The Secret of the Tree Revealed", false],
-["The Last Seed", false],
-["Luna's Choice", false],
-["The Night the Sky Split", false],
-["The Beginning of the Great War", false],
+<p>
+Luna looked at him.
+</p>
 
-["The Shadows Return", false],
-["Everyone Together", false],
-["The Battle at the Farm", false],
-["Garo's Secret", false],
-["The Last Gate", false],
-["The Great Sacrifice", false],
-["Light in the Darkness", false],
-["Saving the Farm", false],
-["The Chest Opens Again", false],
-["Beyond the Gate", false]
+<p>
+"What's wrong, Garo?"
+</p>
 
-];
+<p>
+The dog stared at the ancient tree.
+</p>
 
+<p>
+Luna placed her hand against its rough bark.
+</p>
 
-const container = document.getElementById("stories");
+<p>
+For a moment, nothing happened.
+</p>
 
+<p>
+Then she heard something.
+</p>
 
-stories.forEach((story,index)=>{
+<p>
+<strong>Knock.</strong>
+</p>
 
-    const number = index + 1;
-    const title = story[0];
-    const isFree = story[1];
+<p>
+Luna froze.
+</p>
 
-    const card = document.createElement("div");
+<p>
+She looked at Garo.
+</p>
 
-    card.className = "card";
+<p>
+"Did you hear that?"
+</p>
 
+<p>
+Garo gave a quiet growl.
+</p>
 
-    let button = "";
+<p>
+Luna pressed her ear against the tree.
+</p>
 
-    if(number === 1){
+<p>
+Nothing.
+</p>
 
-        button = `
-            <a class="btn" href="stories/01.html">
-                READ STORY
-            </a>
-        `;
+<p>
+Only the sound of the river flowing nearby.
+</p>
 
-    }else if(isFree){
+<p>
+That evening, during dinner, Luna finally asked her grandmother about the tree.
+</p>
 
-        button = `
-            <span class="btn disabled">
-                COMING SOON
-            </span>
-        `;
+<p>
+"Grandma, how old is that tree beside the river?"
+</p>
 
-    }else{
+<p>
+Her grandmother became very still.
+</p>
 
-        const pack = Math.ceil((number - 10) / 10);
+<p>
+"Very old," she answered.
+</p>
 
-        button = `
-            <div class="pack">
-                PACK ${pack} — 10 USDT
-            </div>
+<p>
+"Was it here before the farm?"
+</p>
 
-            <span class="btn disabled">
-                🔒 LOCKED
-            </span>
-        `;
-    }
+<p>
+Her grandmother looked toward the window.
+</p>
 
+<p>
+"Long before the farm."
+</p>
 
-    card.innerHTML = `
+<p>
+Luna waited for more.
+</p>
 
-        <div class="number">
-            STORY ${String(number).padStart(2,"0")}
-        </div>
+<p>
+But her grandmother only smiled.
+</p>
 
-        <h2>
-            ${title}
-        </h2>
+<p>
+"Perhaps one day it will tell you its story itself."
+</p>
 
-        ${
-            isFree
-            ?
-            `<div class="free">FREE</div>`
-            :
-            `<div class="locked">LOCKED</div>`
-        }
+<p>
+Luna laughed.
+</p>
 
-        <br>
+<p>
+"Trees can't talk."
+</p>
 
-        ${button}
+<p>
+Her grandmother looked at her carefully.
+</p>
 
-    `;
+<p>
+Then she whispered:
+</p>
 
+<p>
+"Not yet..."
+</p>
 
-    container.appendChild(card);
+<p>
+That night, Luna lay awake in her new room. Moonlight entered through the window.
+</p>
 
-});
+<p>
+She looked outside.
+</p>
 
-</script>
+<p>
+At first, everything was dark and quiet.
+</p>
+
+<p>
+Then she saw something between the branches of the ancient tree.
+</p>
+
+<p>
+A tiny light.
+</p>
+
+<p>
+It appeared for only a few seconds.
+</p>
+
+<p>
+Then it disappeared.
+</p>
+
+<p>
+Luna sat up in bed.
+</p>
+
+<p>
+Garo suddenly opened his eyes.
+</p>
+
+<p>
+Both of them looked toward the window.
+</p>
+
+<div class="end">
+The ancient tree was not simply an old tree.
+<br><br>
+And Luna had just taken the first step toward discovering why.
+</div>
+
+</div>
+
+<a class="back" href="../index.html">
+← BACK TO COLLECTION
+</a>
+
+</div>
 
 </body>
 </html>
