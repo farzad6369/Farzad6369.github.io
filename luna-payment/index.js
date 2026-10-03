@@ -1,4 +1,10 @@
-
-name = "luna-payment"
-main = "index.js"
-compatibility_date = "2026-10-03"
+export default {
+  async fetch(request, env) {
+    return new Response("Luna Payment Worker is running.", {
+      status: 200,
+      headers: {
+        "Content-Type": "text/plain"
+      }
+    });
+  }
+};
