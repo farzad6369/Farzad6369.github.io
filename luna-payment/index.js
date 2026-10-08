@@ -2,69 +2,64 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
-    // Test
-    if (request.method === "GET" && url.pathname === "/") {
-      return new Response(
-        JSON.stringify({
-          ok: true,
-          service: "Luna Payment",
-          oxialink: Boolean(env.OXIA_API_KEY && env.OXIA_API_SECRET)
-        }),
-        {
-          headers: { "Content-Type": "application/json" }
-        }
-      );
-    }
-
-    // Create Oxialink invoice
-    if (request.method === "POST" && url.pathname === "/create-invoice") {
+    if (url.pathname === "/create-invoice" && request.method === "POST") {
       try {
-        const body = await request.json();
+        if (!env.OXIA_API_KEY || !env.OXIA_API_SECRET) {
+          return Response.json(
+            { error: "Payment credentials are missing" },
+            { status: 500 }
+          );
+        }
 
+        const body = await request.json();
         const amount = Number(body.amount || 10);
+
+        if (!Number.isFinite(amount) || amount < 8) {
+          return Response.json(
+            { error: "Amount must be at least 8 USD for this test" },
+            { status: 400 }
+          );
+        }
 
         const response = await fetch(
           "https://oxialink.com/api/v1/invoice/create",
           {
             method: "POST",
             headers: {
-              "Content-Type": "application/json",
               "x-api-key": env.OXIA_API_KEY,
-              "x-api-password": env.OXIA_API_SECRET
+              "x-api-password": env.OXIA_API_SECRET,
+              "Content-Type": "application/json"
             },
             body: JSON.stringify({
-              amount: amount,
+              amount,
               fiat_currency: "USD",
-              coin: "USDT_SOLANA"
+              coin: "USDT_SOLANA",
+              description: "Luna Magical World Stories"
             })
           }
         );
 
-        const data = await response.text();
+        const result = await response.text();
 
-        return new Response(data, {
+        return new Response(result, {
           status: response.status,
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type":
+              response.headers.get("Content-Type") || "application/json"
           }
         });
-
       } catch (error) {
-        return new Response(
-          JSON.stringify({
-            ok: false,
-            error: error.message
-          }),
-          {
-            status: 500,
-            headers: {
-              "Content-Type": "application/json"
-            }
-          }
+        return Response.json(
+          { error: "Invoice creation failed" },
+          { status: 500 }
         );
       }
     }
 
-    return new Response("Not Found", { status: 404 });
+    return Response.json({
+      ok: true,
+      service: "Luna Payment",
+      endpoint: "/create-invoice"
+    });
   }
 };
