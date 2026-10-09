@@ -2,38 +2,43 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
-    // Health check
     if (request.method === "GET" && url.pathname === "/") {
-      return new Response(
-        JSON.stringify({
-          ok: true,
-          service: "پرداخت لونا",
-          oxialink: !!(env.OXIA_API_KEY && env.OXIA_API_SECRET)
-        }),
-        {
-          headers: {
-            "content-type": "application/json; charset=utf-8"
-          }
-        }
-      );
+      return Response.json({
+        ok: true,
+        service: "پرداخت لونا",
+        oxialink: !!(env.OXIA_API_KEY && env.OXIA_API_SECRET)
+      });
     }
 
-    // Create invoice
     if (request.method === "POST" && url.pathname === "/create-invoice") {
       try {
         if (!env.OXIA_API_KEY || !env.OXIA_API_SECRET) {
-          return new Response(
-            JSON.stringify({
-              ok: false,
-              error: "Payment credentials are missing"
-            }),
-            {
-              status: 500,
-              headers: {
-                "content-type": "application/json; charset=utf-8"
-              }
-            }
-          );
+          return Response.json({
+            ok: false,
+            error: "Payment credentials are missing"
+          }, { status: 500 });
+        }
+
+        const body = await request.json();
+        const packId = String(body.pack_id || "");
+
+        const packs = {
+          "stories-11-20": 10,
+          "stories-21-30": 10,
+          "stories-31-40": 10,
+          "stories-41-50": 10,
+          "stories-51-60": 10,
+          "stories-61-70": 10,
+          "stories-71-80": 10,
+          "stories-81-90": 10,
+          "stories-91-100": 10
+        };
+
+        if (!Object.prototype.hasOwnProperty.call(packs, packId)) {
+          return Response.json({
+            ok: false,
+            error: "Invalid pack_id"
+          }, { status: 400 });
         }
 
         const response = await fetch(
@@ -46,114 +51,42 @@ export default {
               "Content-Type": "application/json"
             },
             body: JSON.stringify({
-              amount: 10,
+              amount: packs[packId],
               fiat_currency: "USD",
               coin: "USDT_SOLANA",
-              external_id: "luna-pack-2-stories-11-20",
-              notify_url:
-                "https://luna-payment.farzad-yazdani63.workers.dev/webhook"
+              external_id: "luna-" + packId,
+              notify_url: url.origin + "/webhook"
             })
           }
         );
 
         const data = await response.json();
 
-        return new Response(
-          JSON.stringify({
-            ok: response.ok,
-            oxialink_status: response.status,
-            invoice: data
-          }),
-          {
-            status: response.ok ? 200 : response.status,
-            headers: {
-              "content-type": "application/json; charset=utf-8"
-            }
-          }
-        );
+        return Response.json({
+          ok: response.ok,
+          oxialink_status: response.status,
+          invoice: data
+        }, { status: response.ok ? 200 : response.status });
+
       } catch (error) {
-        return new Response(
-          JSON.stringify({
-            ok: false,
-            error: error.message
-          }),
-          {
-            status: 500,
-            headers: {
-              "content-type": "application/json; charset=utf-8"
-            }
-          }
-        );
+        return Response.json({
+          ok: false,
+          error: error.message
+        }, { status: 500 });
       }
     }
 
-    // Oxialink webhook
     if (request.method === "POST" && url.pathname === "/webhook") {
-      try {
-        const body = await request.text();
-
-        console.log("Oxialink webhook received:", body);
-
-        let data;
-
-        try {
-          data = JSON.parse(body);
-        } catch {
-          return new Response(
-            JSON.stringify({
-              ok: false,
-              error: "Invalid JSON"
-            }),
-            {
-              status: 400,
-              headers: {
-                "content-type": "application/json; charset=utf-8"
-              }
-            }
-          );
-        }
-
-        console.log("Oxialink payment data:", JSON.stringify(data));
-
-        return new Response(
-          JSON.stringify({
-            ok: true,
-            received: true
-          }),
-          {
-            status: 200,
-            headers: {
-              "content-type": "application/json; charset=utf-8"
-            }
-          }
-        );
-      } catch (error) {
-        return new Response(
-          JSON.stringify({
-            ok: false,
-            error: error.message
-          }),
-          {
-            status: 500,
-            headers: {
-              "content-type": "application/json; charset=utf-8"
-            }
-          }
-        );
-      }
+      return Response.json({
+        ok: false,
+        payment_approved: false,
+        error: "Webhook verification is not configured"
+      }, { status: 501 });
     }
 
-    return new Response(
-      JSON.stringify({
-        ok: false,
-        error: "Not found"
-      }),
-      {
-        status: 404,
-        headers: {
-          "content-type": "application/json; charset=utf-8"
-        }
-      }
-    );
+    return Response.json({
+      ok: false,
+      error: "Not found"
+    }, { status: 404 });
   }
 };
