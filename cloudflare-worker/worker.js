@@ -76,6 +76,41 @@ export default {
       }
     }
 
+    if (request.method === "POST" && url.pathname === "/invoice-status") {
+      try {
+        if (!env.OXIA_API_KEY || !env.OXIA_API_SECRET) {
+          return Response.json({ ok: false, error: "Payment credentials are missing" }, { status: 500 });
+        }
+
+        const body = await request.json();
+        const invoiceCode = String(body.invoice_code || "").trim();
+
+        if (!/^INV-[A-Z0-9]+$/i.test(invoiceCode)) {
+          return Response.json({ ok: false, error: "Invalid invoice_code" }, { status: 400 });
+        }
+
+        const response = await fetch("https://oxialink.com/api/v1/invoice/get", {
+          method: "POST",
+          headers: {
+            "x-api-key": env.OXIA_API_KEY,
+            "x-api-password": env.OXIA_API_SECRET,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ invoice_code: invoiceCode })
+        });
+
+        const data = await response.json();
+
+        return Response.json({
+          ok: response.ok,
+          oxialink_status: response.status,
+          result: data
+        }, { status: response.ok ? 200 : response.status });
+      } catch (error) {
+        return Response.json({ ok: false, error: "Invoice status request failed" }, { status: 500 });
+      }
+    }
+
     if (request.method === "POST" && url.pathname === "/webhook") {
       return Response.json({
         ok: false,
