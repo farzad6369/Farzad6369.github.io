@@ -112,11 +112,30 @@ export default {
     }
 
     if (request.method === "POST" && url.pathname === "/webhook") {
+      const secret = env.OXIALINK_WEBHOOK_SECRET || env.OXIA_WEBHOOK_SECRET;
+
+      if (!secret) {
+        return Response.json({ ok: false, error: "Webhook secret is missing" }, { status: 500 });
+      }
+
+      let body;
+      try {
+        body = await verifyOxialink(request, secret);
+      } catch {
+        body = null;
+      }
+
+      if (!body) {
+        return Response.json({ ok: false, error: "Invalid webhook signature or timestamp" }, { status: 401 });
+      }
+
       return Response.json({
-        ok: false,
+        ok: true,
+        received: true,
+        event: body.event,
         payment_approved: false,
-        error: "Webhook verification is not configured"
-      }, { status: 501 });
+        message: "Webhook verified; payment fulfillment is not enabled yet"
+      });
     }
 
     return Response.json({
@@ -125,3 +144,54 @@ export default {
     }, { status: 404 });
   }
 };
+
+async function verifyOxialink(request, secret) {
+  let body;
+  try {
+    body = JSON.parse(await request.text());
+  } catch {
+    return null;
+  }
+
+  const { id, timestamp, event, data } = body || {};
+  if (!id || !timestamp || !event || data == null) return null;
+  if (
+    request.headers.get("x-oxialink-delivery") !== id ||
+    request.headers.get("x-oxialink-timestamp") !== timestamp ||
+    request.headers.get("x-oxialink-event") !== event
+  ) return null;
+
+  const time = Date.parse(timestamp);
+  if (!Number.isFinite(time) || Math.abs(Date.now() - time) > 5 * 60 * 1000) {
+    return null;
+  }
+
+  const enc = new TextEncoder();
+  const key = await crypto.subtle.importKey(
+    "raw",
+    enc.encode(secret),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"]
+  );
+
+  const mac = await crypto.subtle.sign(
+    "HMAC",
+    key,
+    enc.encode(id + "." + timestamp + "." + event + "." + JSON.stringify(data))
+  );
+
+  const expected = [...new Uint8Array(mac)]
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
+
+  const given = request.headers.get("x-oxialink-signature") || "";
+  if (given.length !== expected.length) return null;
+
+  let diff = 0;
+  for (let i = 0; i < given.length; i++) {
+    diff |= given.charCodeAt(i) ^ expected.charCodeAt(i);
+  }
+
+  return diff === 0 ? body : null;
+}
