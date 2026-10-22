@@ -1,3 +1,8 @@
 name = "luna-payment"
 main = "worker.js"
 compatibility_date = "2026-10-06"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "luna-users"
+database_id = "89f1e476-cdca-43e1-b1ea-a596ec9629ec"
